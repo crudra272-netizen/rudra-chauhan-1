@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=2, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            box-sizing: border-box;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+        form{
+        margin-top: 45px;
+            width: 34px;
+            height: 77px;
+            gap: 5px;
+            display: grid;
+            
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <input type="text"  name="username" placeholder="Enter your name">
+        <br>
+        <input type="password" name="password" placeholder="Enter your password">
+        <br>
+        <button id="but">Submit</button>
+    </form>
+    <script>
+        const form = document.querySelector('form');
+        const button = document.getElementById('but');
+
+        button.onclick = function(event) {
+            event.preventDefault();
+            const username = form.username.value.trim();
+            const password = form.password.value.trim();
+
+            if (!username || !password) {
+                alert('Please enter both username and password.');
+                return;
+            }
+
+            alert('Submitted:\nUsername: ' + username );
+        }
+    </script>654
+</body>
+</html>
