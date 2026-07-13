@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Form Validation</title>
+
+    <style>
+        label.error{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+
+<form id="myForm">
+
+    Name:
+    <input type="text" name="name">
+    <br><br>
+
+    Email:
+    <input type="email" name="email">
+    <br><br>
+
+    Password:
+    <input type="password" id="password" name="password">
+    <br><br>
+
+    Confirm Password:
+    <input type="password" name="confirm">
+    <br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- jQuery Validation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"></script>
+
+<script>
+$("#myForm").validate({
+
+    rules: {
+        name: "required",
+
+        email: {
+            required: true,
+            email: true
+        },
+
+        password: {
+            required: true,
+            minlength: 6
+        },
+
+        confirm: {
+            required: true,
+            equalTo: "#password"
+        }
+    },
+messages: {
+        name: "Please enter your name",
+
+        email: {
+            required: "Please enter your email",
+            email: "Please enter a valid email"
+        },
+
+        age: {
+            required: "Please enter your age",
+            min: "Age must be at least 18",
+            max: "Age must not exceed 60"
+        },
+
+        password: {
+            required: "Please enter your password",
+            minlength: "Password must be at least 6 characters long"
+        },
+
+        confirm: {
+            required: "Please confirm your password",
+            equalTo: "Passwords do not match"
+        }
+    },
+    submitHandler: function(form) {
+        alert("Form Submitted Successfully!");
+        form.reset();
+    }
+
+});
+</script>
+
+</body>
+</html>
