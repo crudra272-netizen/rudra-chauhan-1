@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking App - Transaction Eligibility</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+        }
+
+        .container{
+            width:350px;
+            margin:50px auto;
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+        }
+
+        label{
+            display:block;
+            margin-top:10px;
+        }
+
+        input,select,button{
+            width:100%;
+            padding:10px;
+            margin-top:5px;
+            box-sizing:border-box;
+        }
+
+        button{
+            background:green;
+            color:white;
+            border:none;
+            cursor:pointer;
+            margin-top:20px;
+        }
+
+        button:hover{
+            background:darkgreen;
+        }
+
+        #result{
+            margin-top:20px;
+            font-weight:bold;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🏦 Banking App</h2>
+    <h3>Transaction Eligibility</h3>
+
+    <label>Current Balance</label>
+    <input type="number" id="balance">
+
+    <label>Withdrawal Amount</label>
+    <input type="number" id="amount">
+
+    <label>Account Type</label>
+    <select id="premium">
+        <option value="false">Normal</option>
+        <option value="true">Premium</option>
+    </select>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function checkWithdrawal(balance, amount, isPremium) {
+
+    const MIN_BALANCE = isPremium ? 500 : 2000;
+    const MAX_WITHDRAW = isPremium ? 100000 : 25000;
+
+    if (isNaN(amount) || amount <= 0) {
+        return " Invalid amount";
+    }
+    else if (amount > MAX_WITHDRAW) {
+        return ` Exceeds daily limit ₹${MAX_WITHDRAW}`;
+    }
+    else if (balance - amount < MIN_BALANCE) {
+        return ` Minimum balance ₹${MIN_BALANCE} required`;
+    }
+    else {
+        let newBal = balance - amount;
+        return `Withdrawal Successful <br>
+                Withdrawn: ₹${amount}<br>
+                Remaining Balance: ₹${newBal}`;
+    }
+}
+
+function calculate(){
+
+    let balance = Number(document.getElementById("balance").value);
+    let amount = Number(document.getElementById("amount").value);
+    let isPremium = document.getElementById("premium").value === "true";
+
+    document.getElementById("result").innerHTML =
+        checkWithdrawal(balance, amount, isPremium);
+}
+</script>
+
+</body>
+</html>
